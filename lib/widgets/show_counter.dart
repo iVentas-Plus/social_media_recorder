@@ -9,7 +9,6 @@ class ShowCounter extends StatelessWidget {
   final TextStyle? counterTextStyle;
   final Color? counterBackGroundColor;
   final double fullRecordPackageHeight;
-  bool middle = false;
   // ignore: sort_constructors_first
   const ShowCounter({
     required this.soundRecorderState,
@@ -19,17 +18,6 @@ class ShowCounter extends StatelessWidget {
     required this.counterBackGroundColor,
   }) : super(key: key);
 
-  double _animationOpacity()
-  {
-    middle = !middle;
-    if(middle){
-      return 0;
-    }
-    else {
-      return 1;
-    }
-  }
-  
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -65,8 +53,8 @@ class ShowCounter extends StatelessWidget {
               ),
               const SizedBox(width: 3),
               AnimatedOpacity(
-                duration: const Duration(milliseconds: 1000),
-                opacity: _animationOpacity(),
+                duration: const Duration(seconds: 1),
+                opacity: soundRecorderState.second % 2 == 0 ? 1 : 0,
                 child: const Icon(
                   Icons.mic,
                   color: Colors.red,
