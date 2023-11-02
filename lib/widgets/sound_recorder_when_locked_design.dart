@@ -63,7 +63,7 @@ class SoundRecorderWhenLockedDesign extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(600),
                   child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 500),
+                    duration: const Duration(milliseconds: 250),
                     curve: Curves.easeIn,
                     width: fullRecordPackageHeight,
                     height: fullRecordPackageHeight,
