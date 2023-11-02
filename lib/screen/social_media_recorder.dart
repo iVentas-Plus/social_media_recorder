@@ -130,6 +130,7 @@ class _SocialMediaRecorder extends State<SocialMediaRecorder> {
         widget.storeSoundRecoringPath ?? "";
     soundRecordNotifier.isShow = false;
     soundRecordNotifier.voidInitialSound();
+    soundRecordNotifier.resetEdgePadding();
     super.initState();
   }
 
