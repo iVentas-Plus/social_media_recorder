@@ -103,7 +103,7 @@ class SoundRecordNotifier extends ChangeNotifier {
 
   finishRecording() {
     if (buttonPressed) {
-      if (second > 1 || minute > 0) {
+      if (second >= 1 || minute > 0) {
         String path = mPath;
         String _time = minute.toString() + ":" + second.toString();
         sendRequestFunction(File.fromUri(Uri(path: path)), _time);
@@ -258,7 +258,7 @@ class SoundRecordNotifier extends ChangeNotifier {
     } else {
       buttonPressed = true;
       String recordFilePath = await getFilePath();
-      _timer = Timer(const Duration(milliseconds: 0), () {
+      _timer = Timer(const Duration(milliseconds: 1000), () {
         recordMp3.start(path: recordFilePath);
       });
 
