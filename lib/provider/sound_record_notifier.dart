@@ -258,7 +258,7 @@ class SoundRecordNotifier extends ChangeNotifier {
     } else {
       buttonPressed = true;
       String recordFilePath = await getFilePath();
-      _timer = Timer(const Duration(milliseconds: 900), () {
+      _timer = Timer(const Duration(milliseconds: 0), () {
         recordMp3.start(path: recordFilePath);
       });
 
