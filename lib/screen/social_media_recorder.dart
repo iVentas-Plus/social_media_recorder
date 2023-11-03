@@ -131,6 +131,11 @@ class _SocialMediaRecorder extends State<SocialMediaRecorder> {
     soundRecordNotifier.isShow = false;
     soundRecordNotifier.voidInitialSound();
     soundRecordNotifier.resetEdgePadding();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      Future.delayed(Duration(seconds: 1), () async{
+        await soundRecordNotifier.checkPermissions();
+      });
+    });
     super.initState();
   }
 
