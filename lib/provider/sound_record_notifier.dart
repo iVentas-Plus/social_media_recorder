@@ -248,27 +248,30 @@ class SoundRecordNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// this function to start record voice
-  record(Function()? startRecord) async {
+  checkPermissions() async{
     if (!_isAcceptedPermission) {
       await Permission.microphone.request();
       await Permission.manageExternalStorage.request();
       await Permission.storage.request();
       _isAcceptedPermission = true;
-    } else {
-      buttonPressed = true;
-      String recordFilePath = await getFilePath();
-      _timer = Timer(const Duration(milliseconds: 1000), () {
-        recordMp3.start(path: recordFilePath);
-      });
-
-      if (startRecord != null) {
-        startRecord();
-      }
-
-      _mapCounterGenerater();
-      notifyListeners();
     }
+  }
+
+  /// this function to start record voice
+  record(Function()? startRecord) async {
+      if(!_isAcceptedPermission) await checkPermissions();
+        buttonPressed = true;
+        String recordFilePath = await getFilePath();
+        _timer = Timer(const Duration(milliseconds: 200), () {
+          recordMp3.start(path: recordFilePath);
+        });
+
+        if (startRecord != null) {
+          startRecord();
+        }
+        _mapCounterGenerater();
+        notifyListeners();
+      
     notifyListeners();
   }
 
