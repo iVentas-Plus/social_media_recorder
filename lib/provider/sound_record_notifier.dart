@@ -25,7 +25,7 @@ class SoundRecordNotifier extends ChangeNotifier {
   String initialStorePathRecord = "";
 
   /// recording mp3 sound Object
-  Record recordMp3 = Record();
+  final recordMp3 = AudioRecorder();
 
   /// recording mp3 sound to check if all permisiion passed
   bool _isAcceptedPermission = false;
@@ -248,7 +248,7 @@ class SoundRecordNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  checkPermissions() async{
+  checkPermissions() async {
     if (!_isAcceptedPermission) {
       await Permission.microphone.request();
       await Permission.manageExternalStorage.request();
@@ -259,19 +259,19 @@ class SoundRecordNotifier extends ChangeNotifier {
 
   /// this function to start record voice
   record(Function()? startRecord) async {
-      if(!_isAcceptedPermission) await checkPermissions();
-        buttonPressed = true;
-        String recordFilePath = await getFilePath();
-        _timer = Timer(const Duration(milliseconds: 200), () {
-          recordMp3.start(path: recordFilePath);
-        });
+    if (!_isAcceptedPermission) await checkPermissions();
+    buttonPressed = true;
+    String recordFilePath = await getFilePath();
+    _timer = Timer(const Duration(milliseconds: 200), () {
+      recordMp3.start(RecordConfig(), path: recordFilePath);
+    });
 
-        if (startRecord != null) {
-          startRecord();
-        }
-        _mapCounterGenerater();
-        notifyListeners();
-      
+    if (startRecord != null) {
+      startRecord();
+    }
+    _mapCounterGenerater();
+    notifyListeners();
+
     notifyListeners();
   }
 
